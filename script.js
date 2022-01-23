@@ -17,8 +17,10 @@ const gameBoard = (() => {
 const Player = (name, token) => {
   const play = (spaceId) => {
     gameBoard.board[spaceId] = token;
+    document.getElementById(spaceId).insertAdjacentHTML('afterbegin', `<p>${token}</p>`);
+    document.getElementById(spaceId).removeEventListener('click', game.playTurn);
   };
-  return {name, token, updateBoard};
+  return {name, token, play};
 };
 
 const player1 = Player('Player 1', 'X');
@@ -41,15 +43,15 @@ const game = ((p1, p2) => {
   };
 
   const playTurn = (e) => {
-    activePlayer.play(e.target.id);
-    console.log(gameBoard.board);
-    e.target.insertAdjacentHTML('afterbegin', `<p>${activePlayer.token}</p>`);
-    e.target.removeEventListener('click', playTurn);
-    changeActivePlayer();
+    activePlayer.play(e.target.id);    
+    changeActivePlayer(); //add conditional - only do this if there is no win/tie
   }
 
   // space event listeners
   document.querySelectorAll('.space').forEach(space => {
     space.addEventListener('click', playTurn);
   });
+
+  return{playTurn};
+
 })(player1, player2);

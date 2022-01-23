@@ -31,8 +31,14 @@ const gameBoard = (() => {
 
 // player factory
 
-const Player = (name, char) => {
-
+const Player = (name, character) => {
+  const logName = () => {
+    console.log(name);
+  }
+  const logCharacter = () => {
+    console.log(character);
+  };
+  return {logName, logCharacter};
 };
 
-const Player1 = Player('Player 1', 'X');
+const player1 = Player('Player 1', 'X');

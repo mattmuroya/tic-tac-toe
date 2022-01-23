@@ -16,13 +16,13 @@ body {
 header {
   font-weight: 100;
   text-align: center;
-  margin: 25px;
+  margin: 20px;
 }
 
 header h1 {
   font-family: 'Roboto Mono', monospace;
   color: #999;
-  font-size: 48px;
+  font-size: 40px;
   font-weight: 200;
 }
 
@@ -36,7 +36,7 @@ header h1 {
   grid-template-rows: repeat(3, 1fr);
   /* grid-auto-flow: column; */
   gap: 2%;
-  width: 550px;
+  width: 500px;
 }
 
 .space {
@@ -51,7 +51,7 @@ header h1 {
 }
 
 .space p {
-  font-size: 8em;
+  font-size: 6em;
   margin: 0;
   padding: 0;
   -webkit-touch-callout: none;
@@ -76,12 +76,25 @@ header h1 {
   background-color: #1c1c1c;
 }
 
+.message-container {
+  font-weight: 100;
+  text-align: center;
+  margin: 20px;
+}
+
+.message {
+  font-family: 'Roboto Mono', monospace;
+  color: #999;
+  font-size: 24px;
+  font-weight: 200;
+}
+
 .win-X {
   color: lime;
 }
 
 .win-O {
-  color: red;
+  color: fuchsia;
 }
 
 @media screen and (max-width: 650px) {
@@ -89,7 +102,7 @@ header h1 {
     width: 400px;
   }
   .space p {
-    font-size: 6em;
+    font-size: 4em;
   }
 }
 
@@ -98,6 +111,6 @@ header h1 {
     width: 300px;
   }
   .space p {
-    font-size: 4em;
+    font-size: 3em;
   }
 }

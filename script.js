@@ -47,6 +47,8 @@ const game = ((p1, p2) => {
     [2,4,6],
   ];
 
+  const message = document.querySelector('.message');
+
   const checkForWin = () => {
     const playedSpaces = gameBoard.board.reduce((indexList, boardSpace, i) => {
       if (boardSpace === activePlayer.token) indexList.push(i);
@@ -74,9 +76,10 @@ const game = ((p1, p2) => {
     e.target.removeEventListener('click', playTurn);
     if (checkForWin()) {
       triggerWin();
-      console.log (`${activePlayer.name} wins!`);
+      message.textContent = `${activePlayer.name} wins!`;
+      message.classList.add(`win-${activePlayer.token}`);
     } else if (checkForTie()) {
-      console.log('tie');
+      message.textContent = "It's a tie!";
     } else {
       changeActivePlayer();
     }

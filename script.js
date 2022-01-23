@@ -52,7 +52,7 @@ const game = ((p1, p2) => {
       if (boardSpace === activePlayer.token) indexList.push(i);
       return indexList;
     },[]);
-    return winConditions.some(winArray => {
+    return winConditions.find(winArray => {
       return winArray.every(winArrIndex => playedSpaces.includes(winArrIndex));
     });
   };
@@ -61,8 +61,12 @@ const game = ((p1, p2) => {
 
   const playTurn = (e) => {
     activePlayer.play(e.target.id);
-    e.target.removeEventListener('click', game.playTurn);
+    e.target.removeEventListener('click', playTurn);
     if (checkForWin()) {
+      const winningArray = checkForWin();
+      winningArray.forEach(index => {
+        document.getElementById(index).classList.add('win-space');
+      });
       console.log (`${activePlayer.name} wins!`);
     } else if (checkForTie()) {
       console.log('tie');
@@ -76,6 +80,6 @@ const game = ((p1, p2) => {
     space.addEventListener('click', playTurn);
   });
 
-  return{};
+  return{checkForWin};
 
 })(player1, player2);

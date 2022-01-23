@@ -6,45 +6,21 @@
 // |6|7|8|
 
 const gameBoard = (() => {
-
   // create the board array
   const board = [
     '', '', '',
     '', '', '',
     '', '', '',];
-  
-  // draw the board, assign ids, add event listeners
-  let grid = document.querySelector('.board');
-  for (let i = 0; i < 9; i++) {
-      let space = document.createElement('div');
-      grid.appendChild(space);
-      space.id = i;
-      space.className = 'space';
-      space.addEventListener('click', (e) => {
-        update(e.target.id, game.getActivePlayer().character);
-        game.changeActivePlayer();
-      })
-  }
-
-  const update = (spaceId, playerChar) => {
-    board[spaceId] = playerChar;
-    document.getElementById(spaceId)
-        .insertAdjacentHTML('afterbegin', `<p>${playerChar}</p>`);
-  };
-
   return{board};
 })();
 
 // player factory
 
-const Player = (name, character) => {
-  const logName = () => {
-    console.log(name);
-  }
-  const logCharacter = () => {
-    console.log(character);
+const Player = (name, token) => {
+  const updateBoard = (spaceId) => {
+    gameBoard.board[spaceId] = token;
   };
-  return {name, character, logName, logCharacter};
+  return {name, token, updateBoard};
 };
 
 const player1 = Player('Player 1', 'X');
@@ -54,7 +30,16 @@ const player2 = Player('Player 2', 'O');
 
 const game = ((p1, p2) => {
   let activePlayer = p1;
-  const getActivePlayer = () => activePlayer;
   const changeActivePlayer = () => activePlayer = activePlayer === p1 ? p2 : p1;
-  return {getActivePlayer, changeActivePlayer};
+  const playTurn = (e) => {
+    activePlayer.updateBoard(e.target.id);
+    console.log(gameBoard.board);
+    e.target.insertAdjacentHTML('afterbegin', `<p>${activePlayer.token}</p>`);
+    e.target.removeEventListener('click', playTurn);
+    changeActivePlayer();
+  }
+  // space event listeners
+  document.querySelectorAll('.space').forEach(space => {
+    space.addEventListener('click', playTurn);
+  });
 })(player1, player2);

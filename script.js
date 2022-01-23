@@ -20,7 +20,7 @@ const Player = (name, token) => {
     let space = document.getElementById(spaceId);
     space.classList.add('taken');
     space.insertAdjacentHTML('afterbegin', `<p>${token}</p>`);
-    space.removeEventListener('click', game.playTurn); // move this to playturn func?
+    // space.removeEventListener('click', game.playTurn); // move this to playturn func?
   };
   return {name, token, play};
 };
@@ -61,6 +61,7 @@ const game = ((p1, p2) => {
 
   const playTurn = (e) => {
     activePlayer.play(e.target.id);
+    e.target.removeEventListener('click', game.playTurn);
     if (checkForWin()) {
       console.log (`${activePlayer.name} wins!`);
     } else if (checkForTie()) {
@@ -75,6 +76,6 @@ const game = ((p1, p2) => {
     space.addEventListener('click', playTurn);
   });
 
-  return{playTurn};
+  return{};
 
 })(player1, player2);

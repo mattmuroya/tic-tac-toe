@@ -63,9 +63,8 @@ const game = ((p1, p2) => {
     activePlayer.play(e.target.id);
     e.target.removeEventListener('click', playTurn);
     if (checkForWin()) {
-      const winningArray = checkForWin();
-      winningArray.forEach(index => {
-        document.getElementById(index).classList.add('win-space');
+      checkForWin().forEach(index => {
+        document.getElementById(index).classList.add(`win-${activePlayer.token}`);
       });
       console.log (`${activePlayer.name} wins!`);
     } else if (checkForTie()) {

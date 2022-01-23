@@ -76,6 +76,14 @@ header h1 {
   background-color: #1c1c1c;
 }
 
+.win-X {
+  color: lime;
+}
+
+.win-O {
+  color: red;
+}
+
 @media screen and (max-width: 650px) {
   .board {
     width: 400px;

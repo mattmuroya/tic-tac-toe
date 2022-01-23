@@ -57,15 +57,23 @@ const game = ((p1, p2) => {
     });
   };
 
+  const triggerWin = () => {
+    checkForWin().forEach(index => {
+      document.getElementById(index).classList.add(`win-${activePlayer.token}`);
+    });
+    document.querySelectorAll('.space').forEach(space => {
+      space.removeEventListener('click', playTurn);
+      space.classList.add('taken');
+    })
+  };
+
   const checkForTie = () => !gameBoard.board.includes('');
 
   const playTurn = (e) => {
     activePlayer.play(e.target.id);
     e.target.removeEventListener('click', playTurn);
     if (checkForWin()) {
-      checkForWin().forEach(index => {
-        document.getElementById(index).classList.add(`win-${activePlayer.token}`);
-      });
+      triggerWin();
       console.log (`${activePlayer.name} wins!`);
     } else if (checkForTie()) {
       console.log('tie');

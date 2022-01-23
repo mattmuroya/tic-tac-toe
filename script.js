@@ -9,7 +9,7 @@ const gameBoard = (() => {
     '', '', '',
     '', '', '',
     '', '', '',];
-  return{board};
+  return {board};
 })();
 
 // player factory
@@ -17,9 +17,10 @@ const gameBoard = (() => {
 const Player = (name, token) => {
   const play = (spaceId) => {
     gameBoard.board[spaceId] = token;
-    document.getElementById(spaceId).classList.add('taken');
-    document.getElementById(spaceId).insertAdjacentHTML('afterbegin', `<p>${token}</p>`);
-    document.getElementById(spaceId).removeEventListener('click', game.playTurn);
+    let space = document.getElementById(spaceId);
+    space.classList.add('taken');
+    space.insertAdjacentHTML('afterbegin', `<p>${token}</p>`);
+    space.removeEventListener('click', game.playTurn); // move this to playturn func?
   };
   return {name, token, play};
 };
@@ -35,17 +36,42 @@ const game = ((p1, p2) => {
 
   const changeActivePlayer = () => activePlayer = activePlayer === p1 ? p2 : p1;
 
+  const winConditions = [
+    [0,1,2],
+    [3,4,5],
+    [6,7,8],
+    [0,3,6],
+    [1,4,7],
+    [2,5,8],
+    [0,4,8],
+    [2,4,6],
+  ];
+
+  console.log(winConditions[0])
+  console.log(winConditions[1])
+  console.log(winConditions[2])
+
   const checkForWin = () => {
-    //
+    const playedSpaces = gameBoard.board.reduce((indexList, boardSpace, i) => {
+      if (boardSpace === activePlayer.token) indexList.push(i);
+      return indexList;
+    },[]);
+    return winConditions.some(winArr => {
+      return winArr.every(winArrNum => playedSpaces.includes(winArrNum));
+    });
   };
 
-  const checkForTie = () => {
-    //
-  };
+  const checkForTie = () => !gameBoard.board.includes('');
 
   const playTurn = (e) => {
-    activePlayer.play(e.target.id);    
-    changeActivePlayer(); //add conditional - only do this if there is no win/tie
+    activePlayer.play(e.target.id);
+    if (checkForWin()) {
+      console.log (`${activePlayer.name} wins!`);
+    } else if (checkForTie()) {
+      console.log('tie');
+    } else {
+      changeActivePlayer();
+    }
   }
 
   // space event listeners
@@ -53,6 +79,6 @@ const game = ((p1, p2) => {
     space.addEventListener('click', playTurn);
   });
 
-  return{playTurn};
+  return{playTurn, checkForWin};
 
 })(player1, player2);

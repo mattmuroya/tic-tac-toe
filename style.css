@@ -1,0 +1,50 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+
+.wrapper {
+  background-color: #090909;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+header {
+  color: #333;
+  text-align: center;
+  margin: 40px;
+}
+
+.board {
+
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, 1fr);
+  -ms-grid-rows: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 2%;
+  width: 90%;
+  max-width: 550px;
+}
+
+.space {
+  border-radius: 3%;
+  background-color: #1c1c1c;
+  transition: 0.1s;
+}
+
+.space::before {
+  content: '';
+  float: left;
+  padding-top: 100%;
+}
+
+.space:hover {
+  background-color: #333;
+}

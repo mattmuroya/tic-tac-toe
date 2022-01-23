@@ -47,17 +47,13 @@ const game = ((p1, p2) => {
     [2,4,6],
   ];
 
-  console.log(winConditions[0])
-  console.log(winConditions[1])
-  console.log(winConditions[2])
-
   const checkForWin = () => {
     const playedSpaces = gameBoard.board.reduce((indexList, boardSpace, i) => {
       if (boardSpace === activePlayer.token) indexList.push(i);
       return indexList;
     },[]);
-    return winConditions.some(winArr => {
-      return winArr.every(winArrNum => playedSpaces.includes(winArrNum));
+    return winConditions.some(winArray => {
+      return winArray.every(winArrIndex => playedSpaces.includes(winArrIndex));
     });
   };
 
@@ -79,6 +75,6 @@ const game = ((p1, p2) => {
     space.addEventListener('click', playTurn);
   });
 
-  return{playTurn, checkForWin};
+  return{playTurn};
 
 })(player1, player2);

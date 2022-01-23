@@ -17,6 +17,7 @@ const gameBoard = (() => {
 const Player = (name, token) => {
   const play = (spaceId) => {
     gameBoard.board[spaceId] = token;
+    document.getElementById(spaceId).classList.add('taken');
     document.getElementById(spaceId).insertAdjacentHTML('afterbegin', `<p>${token}</p>`);
     document.getElementById(spaceId).removeEventListener('click', game.playTurn);
   };

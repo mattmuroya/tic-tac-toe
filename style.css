@@ -7,7 +7,6 @@ body {
   background-color: #000;
 }
 
-
 .wrapper {
   display: flex;
   flex-direction: column;
@@ -22,7 +21,7 @@ header {
 
 header h1 {
   font-family: 'Roboto Mono', monospace;
-  color: #1c1c1c;
+  color: #999;
   font-size: 48px;
   font-weight: 200;
 }
@@ -49,7 +48,6 @@ header h1 {
   color: #999;
   transition: 0.1s;
   overflow: hidden;
-
 }
 
 .space p {
@@ -58,10 +56,10 @@ header h1 {
   padding: 0;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
-   -khtml-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .space::before {
@@ -72,6 +70,10 @@ header h1 {
 
 .space:hover {
   background-color: #333;
+}
+
+.space.taken:hover {
+  background-color: #1c1c1c;
 }
 
 @media screen and (max-width: 650px) {

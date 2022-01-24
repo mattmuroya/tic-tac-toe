@@ -9,10 +9,7 @@ const gameBoard = (() => {
     '', '', '',
     '', '', '',
     '', '', '',];
-  
-  
   return {board};
-
 })();
 
 // player factory

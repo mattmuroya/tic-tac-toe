@@ -24,8 +24,8 @@ const Player = (name, token) => {
   return {name, token, play};
 };
 
-const player1 = Player('Player 1', 'X');
-const player2 = Player('Player 2', 'O');
+const player1 = Player(prompt('name?'), 'X');
+const player2 = Player(prompt('name?'), 'O');
 
 // game object
 
@@ -47,6 +47,7 @@ const game = ((p1, p2) => {
   ];
 
   const message = document.querySelector('.message');
+  message.textContent = `${activePlayer.name}'s turn.`
 
   const checkForWin = () => {
     const playedSpaces = gameBoard.board.reduce((indexList, boardSpace, i) => {
@@ -81,12 +82,16 @@ const game = ((p1, p2) => {
   const playTurn = (e) => {
     activePlayer.play(e.target.id);
     e.target.removeEventListener('click', playTurn);
+    let gameEnd = false;
     if (checkForWin()) {
       triggerWin();
+      gameEnd = true;
     } else if (checkForTie()) {
       triggerTie();
+      gameEnd = true;
     }
     changeActivePlayer();
+    if (!gameEnd) message.textContent = `${activePlayer.name}'s turn.`
   }
 
   // space event listeners
@@ -106,7 +111,7 @@ const game = ((p1, p2) => {
       space.className = 'space';
       if (space.firstChild) space.removeChild(space.firstChild);
     }
-    message.textContent = '';
+    message.textContent = `${activePlayer.name}'s turn.`;
     message.className = 'message' // reset styles
     resetBtn.className = 'reset-button'; // reset styles
     initializeSpaces();
@@ -115,6 +120,6 @@ const game = ((p1, p2) => {
   const resetBtn = document.querySelector('.reset-button');
   resetBtn.addEventListener('click', reset);
 
-  return{};
+  return{checkForTie, checkForWin};
 
 })(player1, player2);

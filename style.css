@@ -5,6 +5,7 @@ body {
   margin: 0;
   padding: 0;
   background-color: #000;
+  font-family: 'Roboto Mono', monospace;
 }
 
 .wrapper {
@@ -20,14 +21,14 @@ header {
 }
 
 header h1 {
-  font-family: 'Roboto Mono', monospace;
+  /* font-family: 'Roboto Mono', monospace; */
   color: #999;
   font-size: 40px;
   font-weight: 200;
 }
 
 .board {
-  font-family: 'Roboto Mono', monospace;
+  /* font-family: 'Roboto Mono', monospace; */
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: repeat(3, 1fr);
@@ -83,10 +84,31 @@ header h1 {
 }
 
 .message {
-  font-family: 'Roboto Mono', monospace;
+  /* font-family: 'Roboto Mono', monospace; */
   color: #999;
   font-size: 24px;
   font-weight: 200;
+}
+
+.reset-button {
+  display: none;
+  font-family: 'Roboto Mono', monospace;
+  width: 100px;
+  height: 40px;
+  background-color: transparent;
+  color: #999;
+  border: 2px solid;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.1s;
+}
+
+.reset-button:hover {
+  color: #999;
+}
+
+.reset-button.visible{
+  display: inline-block;
 }
 
 .win-X {

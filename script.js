@@ -9,7 +9,10 @@ const gameBoard = (() => {
     '', '', '',
     '', '', '',
     '', '', '',];
+  
+  
   return {board};
+
 })();
 
 // player factory
@@ -20,7 +23,6 @@ const Player = (name, token) => {
     let space = document.getElementById(spaceId);
     space.classList.add('taken');
     space.insertAdjacentHTML('afterbegin', `<p>${token}</p>`);
-    // space.removeEventListener('click', game.playTurn); // move this to playturn func?
   };
   return {name, token, play};
 };
@@ -67,7 +69,15 @@ const game = ((p1, p2) => {
       space.removeEventListener('click', playTurn);
       space.classList.add('taken');
     })
+    message.textContent = `${activePlayer.name} wins!`;
+    message.classList.add(`win-${activePlayer.token}`);
+    resetBtn.classList.add('visible', `win-${activePlayer.token}`);
   };
+
+  const triggerTie = () => {
+    message.textContent = "It's a tie!";
+    resetBtn.classList.add('visible');
+  }
 
   const checkForTie = () => !gameBoard.board.includes('');
 
@@ -76,20 +86,38 @@ const game = ((p1, p2) => {
     e.target.removeEventListener('click', playTurn);
     if (checkForWin()) {
       triggerWin();
-      message.textContent = `${activePlayer.name} wins!`;
-      message.classList.add(`win-${activePlayer.token}`);
     } else if (checkForTie()) {
-      message.textContent = "It's a tie!";
-    } else {
-      changeActivePlayer();
+      triggerTie();
     }
+    changeActivePlayer();
   }
 
   // space event listeners
-  document.querySelectorAll('.space').forEach(space => {
-    space.addEventListener('click', playTurn);
-  });
+  const initializeSpaces = () => {
+    document.querySelectorAll('.space').forEach(space => {
+      space.addEventListener('click', playTurn);
+    });
+  };
+  initializeSpaces();
 
-  return{checkForWin};
+  // reset
+
+  const reset = () => {
+    for (let i in gameBoard.board) {
+      gameBoard.board[i] = '';
+      let space = document.getElementById(i);
+      space.className = 'space';
+      if (space.firstChild) space.removeChild(space.firstChild);
+    }
+    message.textContent = '';
+    message.className = 'message' // reset styles
+    resetBtn.className = 'reset-button'; // reset styles
+    initializeSpaces();
+  };
+
+  const resetBtn = document.querySelector('.reset-button');
+  resetBtn.addEventListener('click', reset);
+
+  return{};
 
 })(player1, player2);

@@ -45,20 +45,6 @@ startBtn.addEventListener('click', () => {
 const game = (p1, p2) => {
   document.querySelectorAll('input').forEach(input => input.value = '');
 
-  // const startBtn = document.querySelector('.start-button');
-  // startBtn.addEventListener('click', () => {
-  //   document.querySelector('.curtain').style.display = 'none';
-  //   name1 = document.getElementById('player-1-name').value.trim();
-  //   if (name1 === '') name1 = 'Player 1';
-  
-  //   name2 = document.getElementById('player-2-name').value.trim();
-  //   if (name2 === '') name2 = 'Player 2';
-  //   return 'yes';
-  // });
-  
-  // let p1 = Player(name1, 'X');
-  // let p2 = Player(name2, 'O');
-
   let activePlayer = p1;
 
   const changeActivePlayer = () => activePlayer = activePlayer === p1 ? p2 : p1;

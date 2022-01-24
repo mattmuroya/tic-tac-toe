@@ -24,8 +24,8 @@ const Player = (name, token) => {
   return {name, token, play};
 };
 
-const player1 = Player(prompt('name?'), 'X');
-const player2 = Player(prompt('name?'), 'O');
+// const player1 = Player(prompt('name?'), 'X');
+// const player2 = Player(prompt('name?'), 'O');
 
 // game object
 

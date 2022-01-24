@@ -8,10 +8,82 @@ body {
   font-family: 'Roboto Mono', monospace;
 }
 
+label p {
+  display: inline-block;
+  margin: 8px 0;
+}
+
+input {
+  padding: 0 10px;
+  background-color: transparent;
+  height: 40px;
+  width: 60%;
+  border: 2px solid #999;
+  border-radius: 5px;
+  color: #999;
+  font-family: 'Roboto Mono', monospace;
+}
+
+button {
+  font-family: 'Roboto Mono', monospace;
+  width: 100px;
+  height: 40px;
+  background-color: transparent;
+  color: #999;
+  border: 2px solid;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.1s;
+}
+
+button:hover {
+  background-color: #999;
+  color: #000;
+}
+
 .wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.curtain {
+  /* display: none; */
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: auto; /* scroll if overflow */
+  background-color: #000;
+}
+
+.splash {
+  color: #999;
+  border: 4px solid #999;
+  border-radius: 5px;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  width: 80%;
+  max-width: 500px;
+  /* display: flex;
+  flex-direction: column; */
+}
+
+.splash h3 {
+  margin: 20px 0px 40px;
+}
+
+.splash-input {
+  margin-bottom: 20px;
+}
+
+.start-button {
+  margin-top: 20px;
 }
 
 header {
@@ -88,19 +160,6 @@ header h1 {
 
 .reset-button {
   display: none;
-  font-family: 'Roboto Mono', monospace;
-  width: 100px;
-  height: 40px;
-  background-color: transparent;
-  color: #999;
-  border: 2px solid;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: 0.1s;
-}
-
-.reset-button:hover {
-  color: #999;
 }
 
 .reset-button.visible{
@@ -121,6 +180,9 @@ header h1 {
   }
   .space p {
     font-size: 4em;
+  }
+  input {
+    width: 90%;
   }
 }
 

@@ -26,7 +26,9 @@ input {
 
 button {
   font-family: 'Roboto Mono', monospace;
-  width: 100px;
+  padding: 0 10px;
+  margin-bottom: 20px;
+  width: auto;
   height: 40px;
   background-color: transparent;
   color: #999;
@@ -158,11 +160,19 @@ header h1 {
   font-weight: 200;
 }
 
-.reset-button {
+.new-game-button {
+  border: none;
+  display: block;
+  width: auto;
+}
+
+.rematch-button,
+.new-game-button {
   display: none;
 }
 
-.reset-button.visible{
+.rematch-button.visible,
+.new-game-button.visible {
   display: inline-block;
 }
 

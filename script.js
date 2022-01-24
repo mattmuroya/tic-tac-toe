@@ -27,25 +27,38 @@ const Player = (name, token) => {
 // game object
 
 const startBtn = document.querySelector('.start-button');
-  startBtn.addEventListener('click', () => {
-    document.querySelector('.curtain').style.display = 'none';
+startBtn.addEventListener('click', () => {
+  document.querySelector('.curtain').style.display = 'none';
 
-    let name1 = document.getElementById('player-1-name').value.trim();
-    if (name1 === '') name1 = 'Player 1';
+  let name1 = document.getElementById('player-1-name').value.trim();
+  if (name1 === '') name1 = 'Player 1';
 
-    let name2 = document.getElementById('player-2-name').value.trim();
-    if (name2 === '') name2 = 'Player 2';
+  let name2 = document.getElementById('player-2-name').value.trim();
+  if (name2 === '') name2 = 'Player 2';
 
-    game(
-      Player(name1, 'X'),
-      Player(name2, 'O')
-    );
-  });
+  game(
+    Player(name1, 'X'),
+    Player(name2, 'O')
+  );
+});
   
 const game = (p1, p2) => {
-
   document.querySelectorAll('input').forEach(input => input.value = '');
+
+  // const startBtn = document.querySelector('.start-button');
+  // startBtn.addEventListener('click', () => {
+  //   document.querySelector('.curtain').style.display = 'none';
+  //   name1 = document.getElementById('player-1-name').value.trim();
+  //   if (name1 === '') name1 = 'Player 1';
   
+  //   name2 = document.getElementById('player-2-name').value.trim();
+  //   if (name2 === '') name2 = 'Player 2';
+  //   return 'yes';
+  // });
+  
+  // let p1 = Player(name1, 'X');
+  // let p2 = Player(name2, 'O');
+
   let activePlayer = p1;
 
   const changeActivePlayer = () => activePlayer = activePlayer === p1 ? p2 : p1;
@@ -84,12 +97,14 @@ const game = (p1, p2) => {
     })
     message.textContent = `${activePlayer.name} wins!`;
     message.classList.add(`win-${activePlayer.token}`);
-    resetBtn.classList.add('visible', `win-${activePlayer.token}`);
+    rematchBtn.classList.add('visible');
+    newGameBtn.classList.add('visible');
   };
 
   const triggerTie = () => {
     message.textContent = "It's a tie!";
-    resetBtn.classList.add('visible');
+    rematchBtn.classList.add('visible');
+    newGameBtn.classList.add('visible');
   }
 
   const checkForTie = () => !gameBoard.board.includes('');
@@ -119,7 +134,7 @@ const game = (p1, p2) => {
 
   // reset
 
-  const reset = () => {
+  const resetMatch = () => {
     for (let i in gameBoard.board) {
       gameBoard.board[i] = '';
       let space = document.getElementById(i);
@@ -128,13 +143,20 @@ const game = (p1, p2) => {
     }
     message.textContent = `${activePlayer.name}'s turn.`;
     message.className = 'message' // reset styles
-    resetBtn.className = 'reset-button'; // reset styles
-    initializeSpaces();
+    rematchBtn.className = 'rematch-button'; // reset styles
+    newGameBtn.className = 'new-game-button';
+    // initializeSpaces();
   };
 
-  const resetBtn = document.querySelector('.reset-button');
-  resetBtn.addEventListener('click', reset);
+  const rematchBtn = document.querySelector('.rematch-button');
+  rematchBtn.addEventListener('click', resetMatch);
 
-  return{checkForTie, checkForWin};
+  const newGameBtn = document.querySelector('.new-game-button');
+  newGameBtn.addEventListener('click', () => {
+    resetMatch();
+    document.querySelector('.curtain').style.display = 'block';
+  });
+
+  return {};
 
 };

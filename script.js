@@ -145,7 +145,7 @@ const game = (p1, p2) => {
     message.className = 'message' // reset styles
     rematchBtn.className = 'rematch-button'; // reset styles
     newGameBtn.className = 'new-game-button';
-    // initializeSpaces();
+    initializeSpaces();
   };
 
   const rematchBtn = document.querySelector('.rematch-button');
@@ -153,8 +153,7 @@ const game = (p1, p2) => {
 
   const newGameBtn = document.querySelector('.new-game-button');
   newGameBtn.addEventListener('click', () => {
-    resetMatch();
-    document.querySelector('.curtain').style.display = 'block';
+    location.reload();
   });
 
   return {};

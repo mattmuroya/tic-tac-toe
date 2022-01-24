@@ -24,28 +24,32 @@ const Player = (name, token) => {
   return {name, token, play};
 };
 
-// game object
-
-const startBtn = document.querySelector('.start-button');
-startBtn.addEventListener('click', () => {
-  document.querySelector('.curtain').style.display = 'none';
-
-  let name1 = document.getElementById('player-1-name').value.trim();
-  if (name1 === '') name1 = 'Player 1';
-
-  let name2 = document.getElementById('player-2-name').value.trim();
-  if (name2 === '') name2 = 'Player 2';
-
-  game(
-    Player(name1, 'X'),
-    Player(name2, 'O')
-  );
-});
+// game module
   
-const game = (p1, p2) => {
+const game = (() => {
+
   document.querySelectorAll('input').forEach(input => input.value = '');
+  const message = document.querySelector('.message');
+
+  const p1 = Player('Player 1', 'X');
+  const p2 = Player('Player 2', 'O');
 
   let activePlayer = p1;
+
+  const startBtn = document.querySelector('.start-button');
+  startBtn.addEventListener('click', () => {
+    document.querySelector('.curtain').style.display = 'none';
+
+    if (document.getElementById('player-1-name').value.trim() !== '')
+        p1.name = document.getElementById('player-1-name').value.trim();
+
+    if (document.getElementById('player-2-name').value.trim() !== '')
+        p2.name = document.getElementById('player-2-name').value.trim();
+    
+    message.textContent = `${activePlayer.name}'s turn.`
+
+  });
+  
 
   const changeActivePlayer = () => activePlayer = activePlayer === p1 ? p2 : p1;
 
@@ -60,8 +64,6 @@ const game = (p1, p2) => {
     [2,4,6],
   ];
 
-  const message = document.querySelector('.message');
-  message.textContent = `${activePlayer.name}'s turn.`
 
   const checkForWin = () => {
     const playedSpaces = gameBoard.board.reduce((indexList, boardSpace, i) => {
@@ -144,4 +146,4 @@ const game = (p1, p2) => {
 
   return {};
 
-};
+})();

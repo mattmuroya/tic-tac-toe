@@ -24,13 +24,28 @@ const Player = (name, token) => {
   return {name, token, play};
 };
 
-// const player1 = Player(prompt('name?'), 'X');
-// const player2 = Player(prompt('name?'), 'O');
-
 // game object
 
-const game = ((p1, p2) => {
+const startBtn = document.querySelector('.start-button');
+  startBtn.addEventListener('click', () => {
+    document.querySelector('.curtain').style.display = 'none';
 
+    let name1 = document.getElementById('player-1-name').value.trim();
+    if (name1 === '') name1 = 'Player 1';
+
+    let name2 = document.getElementById('player-2-name').value.trim();
+    if (name2 === '') name2 = 'Player 2';
+
+    game(
+      Player(name1, 'X'),
+      Player(name2, 'O')
+    );
+  });
+  
+const game = (p1, p2) => {
+
+  document.querySelectorAll('input').forEach(input => input.value = '');
+  
   let activePlayer = p1;
 
   const changeActivePlayer = () => activePlayer = activePlayer === p1 ? p2 : p1;
@@ -122,4 +137,4 @@ const game = ((p1, p2) => {
 
   return{checkForTie, checkForWin};
 
-})(player1, player2);
+};

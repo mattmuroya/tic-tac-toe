@@ -1,4 +1,4 @@
-// create the board array
+// board module
 
 // |0|1|2|
 // |3|4|5|
@@ -47,9 +47,7 @@ const game = (() => {
         p2.name = document.getElementById('player-2-name').value.trim();
     
     message.textContent = `${activePlayer.name}'s turn.`
-
   });
-  
 
   const changeActivePlayer = () => activePlayer = activePlayer === p1 ? p2 : p1;
 
@@ -63,7 +61,6 @@ const game = (() => {
     [0,4,8],
     [2,4,6],
   ];
-
 
   const checkForWin = () => {
     const playedSpaces = gameBoard.board.reduce((indexList, boardSpace, i) => {
@@ -145,5 +142,4 @@ const game = (() => {
   });
 
   return {};
-
 })();

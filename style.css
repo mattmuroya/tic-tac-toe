@@ -162,8 +162,12 @@ header h1 {
 
 .new-game-button {
   border: none;
-  display: block;
   width: auto;
+}
+
+.rematch-button {
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .rematch-button,
@@ -173,7 +177,7 @@ header h1 {
 
 .rematch-button.visible,
 .new-game-button.visible {
-  display: inline-block;
+  display: block;
 }
 
 .win-X {

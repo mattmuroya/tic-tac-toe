@@ -138,7 +138,9 @@ const game = (() => {
 
   const newGameBtn = document.querySelector('.new-game-button');
   newGameBtn.addEventListener('click', () => {
-    location.reload();
+    resetMatch();
+    document.querySelector('.curtain').style.display = 'block';
+    activePlayer = p1;
   });
 
   return {};
